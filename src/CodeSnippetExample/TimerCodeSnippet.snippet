@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Timer Start</Title>
+			<Author>Me</Author>
+			<Description>Starts a new timer using StopWatch and stores it in a variable.</Description>
+			<HelpUrl>https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.stopwatch?view=net-5.0</HelpUrl>
+			<Keywords>
+				<Keyword>Debug</Keyword>
+				<Keyword>Timer</Keyword>
+			</Keywords>
+			<Shortcut>tmr</Shortcut>
+		</Header>
+		<Snippet>
+
+			<!--Actual code-->
+			<Code Language="CSharp">
+				<![CDATA[var $VarName$ = Stopwatch.StartNew();]]>
+			</Code>
+
+			<!--Declaration of replacement parameters-->
+			<Declarations>
+				<Literal>
+					<ID>VarName</ID>
+					<ToolTip>Choose the name for the timer variable.</ToolTip>
+					<Default>timer</Default>
+				</Literal>
+			</Declarations>
+
+			<!--Declaration of namespace dependencies-->
+			<Imports>
+				<Import>
+					<Namespace>System.Diagnostics</Namespace>
+				</Import>
+			</Imports>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>
