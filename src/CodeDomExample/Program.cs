@@ -14,7 +14,8 @@ namespace CodeDomExample
 
             var options = new CodeGeneratorOptions
             {
-                BlankLinesBetweenMembers = true
+                BlankLinesBetweenMembers = true,
+                BracingStyle = "C"
             };
 
             GenerateCsharpModel(model, "Squirrel.cs", options);
@@ -66,11 +67,13 @@ namespace CodeDomExample
                 Name = "Name",
                 Attributes = MemberAttributes.Public,
                 HasGet = true,
-                HasSet = false
             };
 
-            nameProperty.GetStatements.Add(new CodeMethodReturnStatement(
-                new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), "name")));
+            nameProperty.GetStatements.Add(
+                new CodeMethodReturnStatement(
+                    new CodeFieldReferenceExpression(
+                        new CodeThisReferenceExpression(), "name")));
+
             codeClass.Members.Add(nameProperty);
         }
 
@@ -99,8 +102,6 @@ namespace CodeDomExample
             codeNamespace.Imports.Add(new CodeNamespaceImport("System"));
             return codeNamespace;
         }
-
-
 
         private static void GenerateCsharpModel(
             CodeCompileUnit model,
