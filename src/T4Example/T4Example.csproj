@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.CodeDom" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="DesigntimeTemplates\DesigntimeTextTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DesigntimeTextTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="RuntimeTemplates\EmailRuntimeTextTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EmailRuntimeTextTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="RuntimeTemplates\RuntimeTextTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RuntimeTextTemplate.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="DesigntimeTemplates\DesigntimeTextTemplate.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DesigntimeTextTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="RuntimeTemplates\EmailRuntimeTextTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>EmailRuntimeTextTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="RuntimeTemplates\RuntimeTextTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>RuntimeTextTemplate.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+
+</Project>

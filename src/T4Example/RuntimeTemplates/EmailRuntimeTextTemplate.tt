@@ -1,0 +1,12 @@
+﻿<#@ template language="C#" #>
+ 
+<html>
+    <head>
+        <title>Welcome e-mail</title>
+    </head>
+    <body>
+        Welcome <#= Name #>!<br/>
+        <br />
+        Date sent: <#= this.SentDate.ToString("d") #> 
+    </body>
+</html>

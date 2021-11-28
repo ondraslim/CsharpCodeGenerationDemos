@@ -1,0 +1,3 @@
+﻿Guid:Id
+string:Name
+int:Age
