@@ -1,6 +1,6 @@
 ﻿using System;
 
-public partial class GeneratedClass
+public partial class DesignTimeGeneratedClass
 {
     public Guid Id { get; set; }
     public string Name { get; set; }

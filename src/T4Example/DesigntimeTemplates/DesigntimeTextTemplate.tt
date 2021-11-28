@@ -7,7 +7,7 @@
 <#@ import namespace="System.IO" #>
 using System;
 
-public partial class GeneratedClass
+public partial class DesignTimeGeneratedClass
 {
 <#
 var filePath = Path.Combine(Path.GetDirectoryName(this.Host.TemplateFile), "properties.txt");
@@ -15,9 +15,11 @@ var lines = File.ReadAllLines(filePath);
 foreach (var line in lines)
 {
     var property = line.Split(':');
+    var propertyType = property[0];
+    var propertyName = property[1];
     if (property.Length != 2) continue;
     #>
-    public <#=property[0]#> <#=property[1]#> { get; set; }
+    public <#=propertyType#> <#=propertyName#> { get; set; }
 <# 
 } 
     var propertiesToString = lines.Select(l => l.Split(':')).Select(p => $"{{{p[1]}}}");
