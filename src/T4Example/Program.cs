@@ -11,6 +11,8 @@ namespace T4Example
             RunRuntimeTemplateDemo();
             RunEmailRuntimeTemplateDemo();
             RunDesignTimeTemplateDemo();
+
+            Console.ReadKey();
         }
 
         private static void RunRuntimeTemplateDemo()
