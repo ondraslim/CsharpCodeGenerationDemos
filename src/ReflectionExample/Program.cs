@@ -59,21 +59,24 @@ namespace ReflectionExample
             Console.WriteLine(nameof(RunAssemblyScanDemo));
 
             // get types in executing assembly
-            var assemblyClasses = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.IsClass).ToList();
+            var assemblyClasses = Assembly.GetExecutingAssembly()
+                .GetTypes()
+                .Where(t => t.IsClass)
+                .ToList();
 
             // get classes implementing interface ISampleInterface
-            var classesImplementingSampleInterface = assemblyClasses
+            var classesOfSampleInterface = assemblyClasses
                 .Where(t => t.GetInterfaces().Contains(typeof(ISampleInterface)));
 
+            Console.WriteLine($"Classes implementing {nameof(ISampleInterface)}: " +
+                              $"{string.Join(", ", classesOfSampleInterface)}");
+
             // get classes not implementing interface ISampleInterface
-            var classesNotImplementingSampleInterface = assemblyClasses
+            var classesNotOfSampleInterface = assemblyClasses
                 .Where(t => !t.GetInterfaces().Contains(typeof(ISampleInterface)));
 
-            Console.WriteLine($"Classes implementing {nameof(ISampleInterface)}: " +
-                              $"{string.Join(", ", classesImplementingSampleInterface)}");
-
             Console.WriteLine($"Classes not implementing {nameof(ISampleInterface)}: " +
-                              $"{string.Join(", ", classesNotImplementingSampleInterface)}");
+                              $"{string.Join(", ", classesNotOfSampleInterface)}");
         }
 
         private static void RunObjectCreationDemo()
@@ -87,7 +90,8 @@ namespace ReflectionExample
 
             // create an instance of SampleClass with constructor matching the provided arguments
             // int: 1, string: "myText"
-            var sampleClass = (SampleClass) Activator.CreateInstance(typeof(SampleClass), 1, "myText");
+            var sampleClass = (SampleClass) Activator.CreateInstance(
+                typeof(SampleClass), 1, "myText");
             
             Console.WriteLine(sampleClass.ToString());
             Console.WriteLine(sampleClass.MyProperty);
