@@ -79,7 +79,19 @@ namespace ReflectionExample
         private static void RunObjectCreationDemo()
         {
             Console.WriteLine(nameof(RunObjectCreationDemo));
-            // TODO
+
+            // create an instance of EmptyClass by invoking a parameterless constructor
+            var emptyClass = Activator.CreateInstance(typeof(EmptyClass));
+            
+            Console.WriteLine(emptyClass.ToString());
+
+            // create an instance of SampleClass with constructor matching the provided arguments
+            // int: 1, string: "myText"
+            var sampleClass = (SampleClass) Activator.CreateInstance(typeof(SampleClass), 1, "myText");
+            
+            Console.WriteLine(sampleClass.ToString());
+            Console.WriteLine(sampleClass.MyProperty);
+            sampleClass.MyMethod("Hello World!");
         }
 
     }
