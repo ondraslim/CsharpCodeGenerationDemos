@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -27,7 +28,7 @@ namespace ReflectionExample
 
             // obtain method infos of the type
             // can be done similarly for fields, properties, etc.
-            var methods = type.GetMethods(BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.Public);
+            MethodInfo[] methods = type.GetMethods(BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.Public);
             foreach (var methodIn in methods)
             {
                 Console.WriteLine($"Method: {methodIn.Name}");
@@ -43,9 +44,9 @@ namespace ReflectionExample
             Type type = sampleClass.GetType();
 
             // obtain information about a specific method
-            var method = type.GetMethod(nameof(SampleClass.MyMethod));
+            MethodInfo? method = type.GetMethod(nameof(SampleClass.MyMethod));
             Console.WriteLine($"Method name: {method.Name}, return type: {method.ReturnType.Name}");
-
+            
             // obtain information about it's parameters
             var parameters = method.GetParameters().Select(p => $"{p.ParameterType.Name}:{p.Name}");
             Console.WriteLine($"Parameters: {string.Join(", ", parameters)}");
@@ -59,20 +60,20 @@ namespace ReflectionExample
             Console.WriteLine(nameof(RunAssemblyScanDemo));
 
             // get types in executing assembly
-            var assemblyClasses = Assembly.GetExecutingAssembly()
+            List<Type> assemblyClassTypes = Assembly.GetExecutingAssembly()
                 .GetTypes()
                 .Where(t => t.IsClass)
                 .ToList();
 
             // get classes implementing interface ISampleInterface
-            var classesOfSampleInterface = assemblyClasses
+            var classesOfSampleInterface = assemblyClassTypes
                 .Where(t => t.GetInterfaces().Contains(typeof(ISampleInterface)));
 
             Console.WriteLine($"Classes implementing {nameof(ISampleInterface)}: " +
                               $"{string.Join(", ", classesOfSampleInterface)}");
 
             // get classes not implementing interface ISampleInterface
-            var classesNotOfSampleInterface = assemblyClasses
+            var classesNotOfSampleInterface = assemblyClassTypes
                 .Where(t => !t.GetInterfaces().Contains(typeof(ISampleInterface)));
 
             Console.WriteLine($"Classes not implementing {nameof(ISampleInterface)}: " +
@@ -84,13 +85,13 @@ namespace ReflectionExample
             Console.WriteLine(nameof(RunObjectCreationDemo));
 
             // create an instance of EmptyClass by invoking a parameterless constructor
-            var emptyClass = Activator.CreateInstance(typeof(EmptyClass));
+            object emptyClass = Activator.CreateInstance(typeof(EmptyClass));
             
             Console.WriteLine(emptyClass.ToString());
 
             // create an instance of SampleClass with constructor matching the provided arguments
             // int: 1, string: "myText"
-            var sampleClass = (SampleClass) Activator.CreateInstance(
+            SampleClass sampleClass = (SampleClass) Activator.CreateInstance(
                 typeof(SampleClass), 1, "myText");
             
             Console.WriteLine(sampleClass.ToString());
